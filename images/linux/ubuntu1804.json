@@ -67,18 +67,14 @@
             }
         }
     ],
-    "provisioners": [
+    "post-processors": [
         {
-            "type": "shell",
-            "inline": [
-                "apt-get install -y sudo lsb-core software-properties-common git wget libunwind8 unzip",
-                "apt-get install -y jq htop nano"
-            ],
-            "environment_vars": [
-                "DEBIAN_FRONTEND=noninteractive"
-            ],
-            "execute_command": "sh -c '{{ .Vars }} {{ .Path }}'"
-        },
+            "type": "docker-tag",
+            "repository": "mk0x9/docker-virtual-environments-ubuntu",
+            "tag": "18.04"
+        }
+    ],
+    "provisioners": [
         {
             "type": "shell",
             "inline": [
@@ -314,6 +310,7 @@
         },
         {
             "type": "shell",
+            "only": ["azure-arm"],
             "inline": [
                 "sleep 30",
                 "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
