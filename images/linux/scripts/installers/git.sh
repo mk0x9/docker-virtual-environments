@@ -6,6 +6,7 @@
 
 # Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh
+source $HELPER_SCRIPTS/os.sh
 
 ## Install git
 add-apt-repository ppa:git-core/ppa -y
@@ -47,10 +48,17 @@ DocumentInstalledItem "Git-ftp ($(git-ftp --version | cut -d ' ' -f 3))"
 
 #Install hub
 snap install hub --classic
+# snap in docker will fail with exit code 1 due to https://bugs.launchpad.net/snappy/+bug/1887238
+if [ $? -eq 1 ] && isDocker ; then
+    echo "2"
+    snap install hub --classic
+fi
 if command -v hub; then
     echo "hub CLI was installed successfully"
     DocumentInstalledItem "Hub CLI ($(hub --version | grep "hub version" | cut -d ' ' -f 3))"
 else
     echo "[!] Hub CLI was not installed"
-    exit 1
+    # exit 1
 fi
+
+sleep 60

@@ -5,6 +5,7 @@
 ################################################################################
 
 set -e
+set -v
 
 # Source the helpers for use with the script
 source $HELPER_SCRIPTS/document.sh

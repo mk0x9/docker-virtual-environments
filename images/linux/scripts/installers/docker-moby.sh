@@ -15,6 +15,10 @@ if isUbuntu20 ; then
     add-apt-repository "deb [arch=amd64,armhf,arm64] https://packages.microsoft.com/ubuntu/20.04/prod testing main"
 fi
 
+if isDocker ; then
+    disableServiceAutostart
+fi
+
 ## Check to see if docker is already installed
 echo "Determing if Docker ($docker_package) is installed"
 if ! IsInstalled $docker_package; then
@@ -27,9 +31,9 @@ else
     echo "Docker ($docker_package) is already installed"
 fi
 
-# Enable docker.service
-systemctl is-active --quiet docker.service || systemctl start docker.service
-systemctl is-enabled --quiet docker.service || systemctl enable docker.service
+if isDocker ; then
+    enableServiceAutostart
+fi
 
 # if isDocker ; then
 #     echo "INSIDE DOCKER"
@@ -41,7 +45,27 @@ systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 #     ln -s /usr/local/docker.sock /var/run/docker.sock
 # fi
 
+#set -v
+
+#sleep 60000000000
+
+if isDocker ; then
+    echo "INSIDE DOCKER"
+#     # change dockerd socket position and symlink host docker.sock as /var/run/docker.sock
+    sed -i "/ListenStream=/c\ListenStream=/var/run/docker.unused.sock" /lib/systemd/system/docker.socket
+    systemctl daemon-reload
+    systemctl restart docker.socket
+#     # rm /var/run/docker.sock
+#     # ln -s /usr/local/docker.sock /var/run/docker.sock
+fi
+
 # echo "replaced docker.sock"
+
+if ! isDocker ; then
+    # Enable docker.service
+    systemctl is-active --quiet docker.service || systemctl start docker.service
+    systemctl is-enabled --quiet docker.service || systemctl enable docker.service
+fi
 
 # ls -la /var/run/docker.sock
 # whoami
@@ -64,20 +88,22 @@ else
     set +e
 fi
 
-#if ! isDocker ; then
-docker pull node:10
-docker pull node:12
-docker pull buildpack-deps:stretch
-docker pull node:10-alpine
-docker pull node:12-alpine
-docker pull debian:8
-docker pull debian:9
-docker pull alpine:3.7
-docker pull alpine:3.8
-docker pull alpine:3.9
-docker pull alpine:3.10
-docker pull ubuntu:14.04
-#fi
+if ! isDocker ; then
+    docker pull node:10
+    docker pull node:12
+    docker pull buildpack-deps:stretch
+    docker pull node:10-alpine
+    docker pull node:12-alpine
+    docker pull debian:8
+    docker pull debian:9
+    docker pull alpine:3.7
+    docker pull alpine:3.8
+    docker pull alpine:3.9
+    docker pull alpine:3.10
+    docker pull ubuntu:14.04
+else
+    docker run --rm hello-world
+fi
 
 ## Add version information to the metadata file
 echo "Documenting Docker version"
