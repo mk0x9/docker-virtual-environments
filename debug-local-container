@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker run -dit --rm --name aaaaa --tmpfs /run --tmpfs /run/lock -v /sys/fs/cgroup:/sys/fs/cgroup:ro --cap-add sys_admin --device=/dev/fuse docker-virtual-environments-ubuntu1804 && docker exec -it aaaaa /bin/bash

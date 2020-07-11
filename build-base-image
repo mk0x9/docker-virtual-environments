@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# docker build --no-cache
+docker build -t docker-virtual-environments-ubuntu1804 -f base-ubuntu1804.Dockerfile .

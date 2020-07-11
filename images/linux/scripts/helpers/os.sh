@@ -19,6 +19,15 @@ function isUbuntu20
     lsb_release -d | grep -q 'Ubuntu 20'
 }
 
+function isDocker
+{
+    if [ -f "/.dockerenv" ] ; then
+	return 0
+    else
+	return 1
+    fi
+}
+
 function getOSVersionLabel
 {
     lsb_release -cs

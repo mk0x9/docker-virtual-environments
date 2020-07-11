@@ -31,6 +31,21 @@ fi
 systemctl is-active --quiet docker.service || systemctl start docker.service
 systemctl is-enabled --quiet docker.service || systemctl enable docker.service
 
+# if isDocker ; then
+#     echo "INSIDE DOCKER"
+#     # change dockerd socket position and symlink host docker.sock as /var/run/docker.sock
+#     sed -i "/ListenStream=/c\ListenStream=/var/run/dockerd.sock" /lib/systemd/system/docker.socket
+#     systemctl daemon-reload
+#     systemctl restart docker.socket
+#     rm /var/run/docker.sock
+#     ln -s /usr/local/docker.sock /var/run/docker.sock
+# fi
+
+# echo "replaced docker.sock"
+
+# ls -la /var/run/docker.sock
+# whoami
+
 # Run tests to determine that the software installed as expected
 echo "Testing to make sure that script performed as expected, and basic scenarios work"
 echo "Checking the docker-moby and moby-buildx"
@@ -49,6 +64,7 @@ else
     set +e
 fi
 
+#if ! isDocker ; then
 docker pull node:10
 docker pull node:12
 docker pull buildpack-deps:stretch
@@ -61,6 +77,7 @@ docker pull alpine:3.8
 docker pull alpine:3.9
 docker pull alpine:3.10
 docker pull ubuntu:14.04
+#fi
 
 ## Add version information to the metadata file
 echo "Documenting Docker version"
