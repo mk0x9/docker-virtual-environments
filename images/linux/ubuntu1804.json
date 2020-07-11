@@ -165,11 +165,7 @@
             "scripts": [
                 "{{template_dir}}/scripts/installers/7-zip.sh",
                 "{{template_dir}}/scripts/installers/ansible.sh",
-                "{{template_dir}}/scripts/installers/azcopy.sh",
-                "{{template_dir}}/scripts/installers/azure-cli.sh",
-                "{{template_dir}}/scripts/installers/azure-devops-cli.sh",
                 "{{template_dir}}/scripts/installers/basic.sh",
-                "{{template_dir}}/scripts/installers/aliyun-cli.sh",
                 "{{template_dir}}/scripts/installers/aws.sh",
                 "{{template_dir}}/scripts/installers/build-essential.sh",
                 "{{template_dir}}/scripts/installers/clang.sh",
@@ -178,7 +174,6 @@
                 "{{template_dir}}/scripts/installers/containers.sh",
                 "{{template_dir}}/scripts/installers/docker-compose.sh",
                 "{{template_dir}}/scripts/installers/docker-moby.sh",
-                "{{template_dir}}/scripts/installers/dotnetcore-sdk.sh",
                 "{{template_dir}}/scripts/installers/erlang.sh",
                 "{{template_dir}}/scripts/installers/firefox.sh",
                 "{{template_dir}}/scripts/installers/gcc.sh",
@@ -187,7 +182,6 @@
                 "{{template_dir}}/scripts/installers/github-cli.sh",
                 "{{template_dir}}/scripts/installers/google-chrome.sh",
                 "{{template_dir}}/scripts/installers/google-cloud-sdk.sh",
-                "{{template_dir}}/scripts/installers/haskell.sh",
                 "{{template_dir}}/scripts/installers/heroku.sh",
                 "{{template_dir}}/scripts/installers/hhvm.sh",
                 "{{template_dir}}/scripts/installers/image-magick.sh",
@@ -198,7 +192,6 @@
                 "{{template_dir}}/scripts/installers/leiningen.sh",
                 "{{template_dir}}/scripts/installers/mercurial.sh",
                 "{{template_dir}}/scripts/installers/miniconda.sh",
-                "{{template_dir}}/scripts/installers/mono.sh",
                 "{{template_dir}}/scripts/installers/mysql.sh",
                 "{{template_dir}}/scripts/installers/nvm.sh",
                 "{{template_dir}}/scripts/installers/nodejs.sh",
@@ -244,7 +237,6 @@
         {
             "type": "shell",
             "scripts":[
-                "{{template_dir}}/scripts/installers/1804/android.sh",
                 "{{template_dir}}/scripts/installers/azpowershell.sh",
                 "{{template_dir}}/scripts/helpers/containercache.sh",
                 "{{template_dir}}/scripts/installers/hosted-tool-cache.sh",
