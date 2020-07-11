@@ -71,7 +71,7 @@
         {
             "type": "docker-tag",
             "repository": "mk0x9/docker-virtual-environments-ubuntu",
-            "tag": "18.04"
+            "tag": "18.04-lite"
         }
     ],
     "provisioners": [
