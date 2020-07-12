@@ -65,6 +65,8 @@ if ! isDocker ; then
     # Enable docker.service
     systemctl is-active --quiet docker.service || systemctl start docker.service
     systemctl is-enabled --quiet docker.service || systemctl enable docker.service
+else
+    systemctl disable docker.service
 fi
 
 # ls -la /var/run/docker.sock

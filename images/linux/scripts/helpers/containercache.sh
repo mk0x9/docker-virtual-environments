@@ -6,6 +6,7 @@
 
 source $HELPER_SCRIPTS/apt.sh
 source $HELPER_SCRIPTS/document.sh
+source $HELPER_SCRIPTS/os.sh
 
 # Check prereqs
 echo "Checking prereqs for image pulls"
@@ -17,15 +18,19 @@ fi
 # Information output
 systemctl status docker --no-pager
 
-# Pull images
-images=(
-    docker.io/jekyll/builder
-    mcr.microsoft.com/azure-pipelines/node8-typescript
-)
+if ! isDocker ; then
+    # Pull images
+    images=(
+        docker.io/jekyll/builder
+        mcr.microsoft.com/azure-pipelines/node8-typescript
+    )
 
-for image in "${images[@]}"; do
-    docker pull "$image"
-done
+    for image in "${images[@]}"; do
+        docker pull "$image"
+    done
+else
+    docker pull hello-world
+fi
 
 ## Add container information to the metadata file
  DocumentInstalledItem "Cached container images"
